@@ -68,6 +68,16 @@ img {
   display: none;
 }
 
+.errorMessage {
+  font-size: 16px;
+  color: red;
+  display: none;
+}
+
+.errorMessageDisplayed {
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
   .topnav a.icon {
