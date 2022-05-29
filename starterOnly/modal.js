@@ -27,6 +27,7 @@ const errorBirthdate = document.getElementById("errorBirthdate")
 const errorLocation = document.getElementById("errorLocation");
 const errorRules = document.getElementById("errorRules");
 const errorQuantity = document.getElementById("errorQuantity");
+const validationModalbg = document.querySelector(".validationBground");
 
 // errorCounter
 let errorCounter = 0;
@@ -47,10 +48,10 @@ function launchModal() {
 
 function closeModal() {
 	modalbg.style.display = "none";
+	validationModalbg.style.display = "none";
 }
 
 function displayErrorMessage(input) {
-	console.log(input);
 	input.classList.add("errorMessageDisplayed");
 	errorCounter++;
 }
@@ -63,14 +64,14 @@ function validationForm() {
 	locationValidation();
 	rulesValidation();
 	if (errorCounter > 0) {
-		console.log("Une erreur de validation a ete commise")
+		errorCounter = 0;
 	} else if (errorCounter == 0) {
-		console.log("Congratulation !")
+		modalbg.style.display = "none";
+		validationModalbg.style.display = "block";
 	}
 }
 
 function nameValidation() {
-	console.log(firstname);
 	if (firstname.value == "" || firstname.value == null) {
 		displayErrorMessage(errorFirst);
 	}
@@ -97,14 +98,12 @@ function birthdateValidation() {
 }
 
 function quantityValidation() {
-	console.log(quantity.value);
 	if (quantity.value < 0 || quantity.value == null || quantity.value == "") {
 		displayErrorMessage(errorQuantity)
 	} 
 }
 
 function rulesValidation() {
-	console.log(rules)
 	if (!rules.checked) {
 		displayErrorMessage(errorRules);
 	}
