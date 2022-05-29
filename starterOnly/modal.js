@@ -56,14 +56,11 @@ function displayErrorMessage(input) {
 }
 
 function validationForm() {
-	console.log("test");
 	nameValidation();
 	emailValidation();
 	birthdateValidation();
 	quantityValidation();
-	console.log("test2");
 	locationValidation();
-	console.log("test3");
 	rulesValidation();
 	if (errorCounter > 0) {
 		console.log("Une erreur de validation a ete commise")
