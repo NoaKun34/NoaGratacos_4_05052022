@@ -92,7 +92,6 @@ function hideErrorMessage(input) {
  * Function for form validation
  */
 function validationForm() {
-	console.log("Bonjour");
 	errorCounter = 0;
 	firstnameValidation();
 	lastnameValidation();
@@ -101,7 +100,6 @@ function validationForm() {
 	quantityValidation();
 	locationValidation();
 	rulesValidation();
-	console.log(errorCounter);
 	if (errorCounter > 0) {
 		errorCounter = 0;
 	} else if (errorCounter == 0) {
@@ -182,11 +180,9 @@ function locationValidation() {
 	let isChecked = false;
 	locations.forEach((current) =>{
 		if (current.checked) {
-			console.log("cureent = ", current);
 			isChecked = true;
 		}
 	})
-	console.log("isChecked =", isChecked);
 	if (!isChecked) {
 		displayErrorMessage(errorLocation);
 	} else {
