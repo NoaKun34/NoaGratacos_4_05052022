@@ -31,6 +31,8 @@ const errorLocation = document.getElementById("errorLocation");
 const errorRules = document.getElementById("errorRules");
 const errorQuantity = document.getElementById("errorQuantity");
 const validationModalbg = document.querySelector(".validationBground");
+const btnClose = document.querySelector(".btn-close");
+const ico = document.querySelector(".icon");
 
 /**
  * Error counter variable for error handling
@@ -48,9 +50,19 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 modalClose.forEach((close) => close.addEventListener("click", closeModal));
 
 /**
+ * Event for close the validation modal
+ */
+ btnClose.forEach((close) => close.addEventListener("click", closeModal));
+
+/**
  * Event for launch validation function
  */
 submit.forEach((btn) => btn.addEventListener("click", validationForm));
+
+/**
+ * Event for editNav
+ */
+ico.forEach((btn) => btn.addEventListener("click", editNav));
 
 /**
  * Function to launch the modal
@@ -133,7 +145,7 @@ function lastnameValidation() {
 	if (lastname.value == "" || lastname.value == null || lastname.value.length < 2) {
 		return displayErrorMessage(errorLast);
 	}
-	return hideErrorMessage(errorFirst);
+	return hideErrorMessage(errorLast);
 }
 
 /**
@@ -143,10 +155,10 @@ function emailValidation() {
 
 	var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-	if (email.value.match(validRegex)) {
-		return hideErrorMessage(errorEmail);
+	if (!email.value.match(validRegex)) {
+		return displayErrorMessage(errorEmail);
 	}
-	return hideErrorMessage(errorFirst);
+	return hideErrorMessage(errorEmail);
 }
 
 /**
@@ -156,7 +168,7 @@ function birthdateValidation() {
 	if (birthdate.value == "" || birthdate.value == null) {
 		return displayErrorMessage(errorBirthdate);
 	}
-	return hideErrorMessage(errorFirst);
+	return hideErrorMessage(errorBirthdate);
 }
 
 /**
@@ -166,7 +178,7 @@ function quantityValidation() {
 	if (quantity.value < 0 || quantity.value == null || quantity.value == "") {
 		return displayErrorMessage(errorQuantity)
 	}
-	return hideErrorMessage(errorFirst);
+	return hideErrorMessage(errorQuantity);
 }
 
 /**
@@ -191,8 +203,8 @@ function locationValidation() {
 		}
 	})
 	if (isChecked) {
-		return hideErrorMessage(errorFirst);
+		return hideErrorMessage(errorLocation);
 	} else {
-		return displayErrorMessage(errorFirst);
+		return displayErrorMessage(errorLocation);
 	}
 }
