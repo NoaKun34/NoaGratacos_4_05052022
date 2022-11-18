@@ -12,6 +12,7 @@ function editNav() {
  */
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const form = document.getElementById("form");
 const formData = document.querySelectorAll(".formData");
 const modalClose = document.querySelectorAll(".close");
 const firstname = document.getElementById("first");
@@ -47,7 +48,12 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 modalClose.forEach((close) => close.addEventListener("click", closeModal));
 
 /**
- * Functiun to launch the modal
+ * Event for launch validation function
+ */
+submit.forEach((btn) => btn.addEventListener("click", validationForm));
+
+/**
+ * Function to launch the modal
  */
 function launchModal() {
 	modalbg.style.display = "block";
@@ -78,6 +84,8 @@ quantity.addEventListener("blur", quantityValidation);
 function displayErrorMessage(input) {
 	input.classList.add("errorMessageDisplayed");
 	errorCounter++;
+
+	return false;
 }
 
 /**
@@ -86,6 +94,8 @@ function displayErrorMessage(input) {
  */
 function hideErrorMessage(input) {
 	input.classList.remove("errorMessageDisplayed");
+
+	return true;
 }
 
 /**
@@ -105,6 +115,7 @@ function validationForm() {
 	} else if (errorCounter == 0) {
 		modalbg.style.display = "none";
 		validationModalbg.style.display = "block";
+		form.reset();
 	}
 }
 
@@ -113,18 +124,16 @@ function validationForm() {
  */
 function firstnameValidation() {
 	if (firstname.value == "" || firstname.value == null || firstname.value.length < 2) {
-		displayErrorMessage(errorFirst);
-	} else {
-		hideErrorMessage(errorFirst);
+		return displayErrorMessage(errorFirst);
 	}
+	return hideErrorMessage(errorFirst);
 }
 
 function lastnameValidation() {
 	if (lastname.value == "" || lastname.value == null || lastname.value.length < 2) {
-		displayErrorMessage(errorLast);
-	} else {
-		hideErrorMessage(errorLast);
+		return displayErrorMessage(errorLast);
 	}
+	return hideErrorMessage(errorFirst);
 }
 
 /**
@@ -135,11 +144,9 @@ function emailValidation() {
 	var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 	if (email.value.match(validRegex)) {
-		hideErrorMessage(errorEmail);
-		return true;
-	} else {
-		displayErrorMessage(errorEmail);
+		return hideErrorMessage(errorEmail);
 	}
+	return hideErrorMessage(errorFirst);
 }
 
 /**
@@ -147,10 +154,9 @@ function emailValidation() {
  */
 function birthdateValidation() {
 	if (birthdate.value == "" || birthdate.value == null) {
-		displayErrorMessage(errorBirthdate);
-	} else {
-		hideErrorMessage(errorBirthdate);
+		return displayErrorMessage(errorBirthdate);
 	}
+	return hideErrorMessage(errorFirst);
 }
 
 /**
@@ -158,17 +164,18 @@ function birthdateValidation() {
  */
 function quantityValidation() {
 	if (quantity.value < 0 || quantity.value == null || quantity.value == "") {
-		displayErrorMessage(errorQuantity)
-	} else {
-		hideErrorMessage(errorQuantity);
+		return displayErrorMessage(errorQuantity)
 	}
+	return hideErrorMessage(errorFirst);
 }
 
 /**
  * Condition field validation function
  */
 function rulesValidation() {
-	if (!rules.checked) {
+	if (rules.checked) {
+		hideErrorMessage(errorRules);
+	} else {
 		displayErrorMessage(errorRules);
 	}
 }
@@ -183,9 +190,9 @@ function locationValidation() {
 			isChecked = true;
 		}
 	})
-	if (!isChecked) {
-		displayErrorMessage(errorLocation);
+	if (isChecked) {
+		return hideErrorMessage(errorFirst);
 	} else {
-		hideErrorMessage(errorLocation);
+		return displayErrorMessage(errorFirst);
 	}
 }
