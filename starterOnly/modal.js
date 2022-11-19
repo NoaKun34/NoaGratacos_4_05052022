@@ -31,8 +31,9 @@ const errorLocation = document.getElementById("errorLocation");
 const errorRules = document.getElementById("errorRules");
 const errorQuantity = document.getElementById("errorQuantity");
 const validationModalbg = document.querySelector(".validationBground");
-const btnClose = document.querySelector(".btn-close");
-const ico = document.querySelector(".icon");
+const btnClose = document.querySelectorAll(".btn-close");
+const ico = document.querySelectorAll(".icon");
+const locationR = document.querySelectorAll(".checkbox-radio")
 
 /**
  * Error counter variable for error handling
@@ -65,6 +66,11 @@ submit.forEach((btn) => btn.addEventListener("click", validationForm));
 ico.forEach((btn) => btn.addEventListener("click", editNav));
 
 /**
+ * Event for location
+ */
+locationR.forEach((btn) => btn.addEventListener("change", locationValidation))
+
+/**
  * Function to launch the modal
  */
 function launchModal() {
@@ -87,7 +93,7 @@ lastname.addEventListener("blur", lastnameValidation);
 email.addEventListener("blur", emailValidation);
 birthdate.addEventListener("blur", birthdateValidation);
 quantity.addEventListener("blur", quantityValidation);
-//locations.addEventListener("change", locationValidation);
+rules.addEventListener("click", rulesValidation);
 
 /**
  * Error handling function
@@ -129,6 +135,7 @@ function validationForm() {
 		validationModalbg.style.display = "block";
 		form.reset();
 	}
+	console.log(locations);
 }
 
 /**
@@ -197,6 +204,7 @@ function rulesValidation() {
  */
 function locationValidation() {
 	let isChecked = false;
+	console.log("test")
 	locations.forEach((current) =>{
 		if (current.checked) {
 			isChecked = true;
