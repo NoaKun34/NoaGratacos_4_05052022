@@ -135,7 +135,6 @@ function validationForm() {
 		validationModalbg.style.display = "block";
 		form.reset();
 	}
-	console.log(locations);
 }
 
 /**
@@ -204,7 +203,6 @@ function rulesValidation() {
  */
 function locationValidation() {
 	let isChecked = false;
-	console.log("test")
 	locations.forEach((current) =>{
 		if (current.checked) {
 			isChecked = true;
